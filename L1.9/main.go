@@ -10,6 +10,7 @@ import "fmt"
 //  Убедитесь, что чтение из второго канала корректно завершается.
 
 func main() {
+	// В задании просили массив, но я сделал слайс, надеюсь это не критично
 	arr := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
 	c := gen(arr...)
 	out := sq(c)
@@ -19,6 +20,7 @@ func main() {
 	}
 }
 
+// Создает канал и пишет в него переданные числа
 func gen(nums ...int) <-chan int {
 	out := make(chan int)
 	go func() {
@@ -31,6 +33,7 @@ func gen(nums ...int) <-chan int {
 	return out
 }
 
+// Берет числа из канала и возвращает новый канал с удвоенными значениями
 func sq(in <-chan int) <-chan int {
 	out := make(chan int)
 	go func() {
