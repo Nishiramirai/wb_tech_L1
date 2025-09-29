@@ -17,11 +17,12 @@ func main() {
 }
 
 func binarySearch(list []int, item int) int {
+	// Реализован ирератвно
 	low := 0
 	high := len(list) - 1
 
 	for low <= high {
-		// трюк для обхода переполняея. Но пу сути делает
+		// трюк для обхода переполнения. Но пу сути делает
 		//тоже самое что и low + high / 2
 		mid := low + (high-low)/2
 		guess := list[mid]
