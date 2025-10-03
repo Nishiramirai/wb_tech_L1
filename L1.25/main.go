@@ -1,5 +1,10 @@
 package main
 
+import (
+	"fmt"
+	"time"
+)
+
 // Своя функция Sleep
 
 // Реализовать собственную функцию sleep(duration) аналогично встроенной функции time.Sleep,
@@ -11,5 +16,16 @@ package main
 // Можно использовать канал + горутину, или цикл на проверку времени (не лучший способ, но для обучения).
 
 func main() {
+	fmt.Println("sleep start")
 
+	sleep(2 * time.Second)
+
+	fmt.Println("sleep end")
+}
+
+// Приостанавливает выполнение текущей горутины на переданное время
+func sleep(d time.Duration) {
+	// Блокируем горутину, пока time.After не вернет канал
+	// спустя переданное в функцию время
+	<-time.After(d)
 }
