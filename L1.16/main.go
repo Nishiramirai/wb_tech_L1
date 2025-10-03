@@ -16,48 +16,35 @@ func main() {
 
 }
 
-func quickSortInner(s []int, low, high int) []int {
-
-	if low < high {
-
-		var p int
-
-		s, p = partition(s, low, high)
-
-		s = quickSortInner(s, low, p-1)
-
-		s = quickSortInner(s, p+1, high)
-
-	}
-
-	return s
-
-}
-
 func quickSort(s []int) []int {
-	return quickSortInner(s, 0, len(s)-1)
-}
-
-func partition(arr []int, low, high int) ([]int, int) {
-
-	pivot := arr[high]
-
-	i := low
-
-	for j := low; j < high; j++ {
-
-		if arr[j] < pivot {
-
-			arr[i], arr[j] = arr[j], arr[i]
-
-			i++
-
-		}
-
+	if len(s) == 0 {
+		return []int{}
 	}
 
+	newSlice := make([]int, len(s))
+	copy(newSlice, s)
+
+	quickSortRecurcive(newSlice, 0, len(newSlice)-1)
+	return newSlice
+}
+
+func quickSortRecurcive(arr []int, low, high int) {
+	if low < high {
+		p := partition(arr, low, high)
+		quickSortRecurcive(arr, low, p-1)
+		quickSortRecurcive(arr, p+1, high)
+	}
+}
+
+func partition(arr []int, low, high int) int {
+	pivot := arr[high]
+	i := low
+	for j := low; j < high; j++ {
+		if arr[j] < pivot {
+			arr[i], arr[j] = arr[j], arr[i]
+			i++
+		}
+	}
 	arr[i], arr[high] = arr[high], arr[i]
-
-	return arr, i
-
+	return i
 }
